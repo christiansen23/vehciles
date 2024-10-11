@@ -48,24 +48,59 @@ public class ProveidorLogic {
     }
 
     /**
-     * Modifica la informació d'un proveïdor existent a la base de dades.
+     * Modifica un proveïdor existent a la base de dades després de validar les
+     * seves dades.
      *
-     * @param proveidor El proveïdor amb la informació modificada.
-     * @throws Exception si es produeix un error durant l'operació.
+     * @param proveidor El proveïdor que es vol modificar amb les noves dades.
+     * @throws Exception Si qualsevol de les validacions falla o si es produeix
+     * un error en l'actualització.
      */
     public void modificarProveidor(Proveidor proveidor) throws Exception {
+
+        if (!ProveidorValidacions.validarCif(proveidor.getCif())) {
+            throw new Exception("Format de CIF invàlid");
+        }
+        if (!ProveidorValidacions.validarCorreu(proveidor.getCorreu_electronic())) {
+            throw new Exception("Format de correu electrònic invàlid");
+        }
+        if (!ProveidorValidacions.validarData(proveidor.getData_creacio().toString())) {
+            throw new Exception("Format de data invàlid");
+        }
+        if (!ProveidorValidacions.validarValoracio(String.valueOf(proveidor.getRating_proveidor()))) {
+            throw new Exception("Format de valoració invàlid.");
+        }
+        if (!ProveidorValidacions.validarMesos(String.valueOf(proveidor.getMesos_de_colaboracio()))) {
+            throw new Exception("Format de Mesos de col·laboració invàlid");
+        }
 
         proveidorDAO.update(proveidor);
     }
 
     /**
-     * Afegeix un nou proveïdor a la llista observable i a la base de dades.
+     * Afegeix un nou proveïdor a la llista observable i a la base de dades
+     * després de validar les seves dades.
      *
      * @param proveidor El proveïdor que es vol afegir.
-     * @throws Exception si es produeix un error durant l'operació.
+     * @throws Exception Si qualsevol de les validacions falla o si es produeix
+     * un error durant l'operació.
      */
     public void afegirProveidor(Proveidor proveidor) throws Exception {
 
+        if (!ProveidorValidacions.validarCif(proveidor.getCif())) {
+            throw new Exception("Format de CIF invàlid");
+        }
+        if (!ProveidorValidacions.validarCorreu(proveidor.getCorreu_electronic())) {
+            throw new Exception("Format de correu electrònic invàlid");
+        }
+        if (!ProveidorValidacions.validarData(proveidor.getData_creacio().toString())) {
+            throw new Exception("Format de data invàlid");
+        }
+        if (!ProveidorValidacions.validarValoracio(String.valueOf(proveidor.getRating_proveidor()))) {
+            throw new Exception("Format de valoració invàlid.");
+        }
+        if (!ProveidorValidacions.validarMesos(String.valueOf(proveidor.getMesos_de_colaboracio()))) {
+            throw new Exception("Format de Mesos de col·laboració invàlid");
+        }
         llistaObservable.add(proveidor);
         // Inserir el proveïdor al DAO
         proveidorDAO.insert(proveidor);

@@ -60,11 +60,11 @@ public class PantallaAutenticacioController extends Mensajes implements Initiali
         // Verificar autenticación
         if (autenticacio.verificarUsuario(usuario, rol)) {
             // Abrir la nueva pantalla si la autenticación es correcta
-            mostrarMensaje("Usuario autenticado correctamente.");
+            mostrarMensaje("Usuari verificat correctament.");
             abrirNuevaPantalla();
         } else {
             // Mostrar mensaje de error
-            mostrarMensajeError("Usuario o rol incorrecto.");
+            mostrarMensajeError("Usuari o rol incorrecte.");
         }
     }
     
